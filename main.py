@@ -146,6 +146,15 @@ data2plot = data.drop(index=[0, 22, 23, 24]).dropna()
 # count and sort data for pie plots
 data2plot_single = data2plot.apply(pd.Series.value_counts, axis=1)
 
+# data to latex table
+data2tex = data.drop(index=[22,23,23]).dropna()
+data2tex = pd.DataFrame(data2tex.T)
+
+with open('Result_Table.tex', 'w') as tab:
+    tab.write(data2tex.to_latex(index=False))
+#columns=['R1', 'R1.1', 'R1.2', 'R1.2.1', 'R1.2.1.1', 'R1.2.1.2', 'R1.2.2', 'R1.2.2.1', 'R1.2.2.2', 'R1.2.2.3', 'R1.2.2.4', 'R1.2.3', 'R1.3', 'R1.3.1', 'R1.3.2', 'R1.3.3', 'R1.4', 'R2', 'R3', 'R4', 'R5']
+
+
 # R1
 
 ## R1.2.1 call function plot_pie_charts
@@ -196,7 +205,7 @@ plt.savefig("R121nestedPie.pdf")
 plot_pie_chart(
     vals=data2plot_single.loc[12].dropna(),
     label=["Not Considered", "Partially Considered", "Fully Considered"],
-    title="R123SoftwareConsideration",
+    title="R123IntelligentSolutionSpace",
 )
 
 
